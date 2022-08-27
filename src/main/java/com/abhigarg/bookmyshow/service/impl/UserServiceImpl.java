@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     public User Login(LoginRequest loginRequest) {
         List<User> users = usersRepository.findByEmailIdAndPassword(loginRequest.getEmailId(), loginRequest.getPassword());
         if (users.size() == 0) {
-            throw new UnauthorizedException("User is authorized");
+            throw new UnauthorizedException("User is not authorized");
         }
         return users.get(0);
     }

@@ -10,5 +10,4 @@ public interface UserService {
     User Add(User user);
 
     User Login(LoginRequest loginRequest);
-
 }
