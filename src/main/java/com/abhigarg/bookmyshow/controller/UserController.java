@@ -1,6 +1,7 @@
 package com.abhigarg.bookmyshow.controller;
 
 import com.abhigarg.bookmyshow.entities.User;
+import com.abhigarg.bookmyshow.pojo.LoginRequest;
 import com.abhigarg.bookmyshow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,5 +26,13 @@ public class UserController {
         User newUser = userService.Add(user);
 
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping
+    @RequestMapping("/login")
+    public ResponseEntity<User> Login(@Valid @RequestBody LoginRequest loginRequest) {
+        User newUser = userService.Login(loginRequest);
+
+        return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 }
