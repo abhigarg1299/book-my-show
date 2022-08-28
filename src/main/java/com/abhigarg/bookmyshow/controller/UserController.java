@@ -20,11 +20,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     @PostMapping
     public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
         User newUser = userService.Add(user);
-
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
@@ -32,7 +30,6 @@ public class UserController {
     @RequestMapping("/login")
     public ResponseEntity<User> Login(@Valid @RequestBody LoginRequest loginRequest) {
         User newUser = userService.Login(loginRequest);
-
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 }
