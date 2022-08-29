@@ -3,11 +3,12 @@ package com.abhigarg.bookmyshow.service.impl;
 import com.abhigarg.bookmyshow.entities.Hall;
 import com.abhigarg.bookmyshow.entities.Movie;
 import com.abhigarg.bookmyshow.entities.Show;
-import com.abhigarg.bookmyshow.entities.Theatre;
 import com.abhigarg.bookmyshow.exceptions.BadRequestException;
 import com.abhigarg.bookmyshow.pojo.ApiResponse;
 import com.abhigarg.bookmyshow.pojo.GetShowRequest;
-import com.abhigarg.bookmyshow.repository.*;
+import com.abhigarg.bookmyshow.repository.HallRepository;
+import com.abhigarg.bookmyshow.repository.MovieRepository;
+import com.abhigarg.bookmyshow.repository.ShowRepository;
 import com.abhigarg.bookmyshow.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,20 +30,6 @@ public class ShowServiceImpl implements ShowService {
     @Autowired
     private HallRepository hallsRepository;
 
-
-//    @Override
-//    public List<Theatre> getTheatreByName(String theatreName) {
-//        List<Theatre> theatreList = theatresRepository.findTheatreByName(theatreName);
-//        if (null == theatreName) {
-//            throw new BadRequestException("theatre name is Empty");
-//        }
-//
-//        if (theatreList.size() == 0) {
-//            throw new BadRequestException(new ApiResponse(false, "no theatres found by name " + theatreName, HttpStatus.BAD_REQUEST));
-//        }
-//
-//        return theatreList;
-//    }
 
     @Override
     public Show Add(Show show) {
@@ -73,13 +60,13 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
 
-    public List<Show> getShowById(int id) {
-        List<Show> showList = showsRepository.findShowById(id);
-        if (showList.isEmpty()) {
+    public Show getShowById(int id) {
+        Show show = showsRepository.findShowById(id);
+        if (null == show) {
             throw new BadRequestException(new ApiResponse(false, "no show found ", HttpStatus.BAD_REQUEST));
         }
 
-        return showList;
+        return show;
     }
 }
 

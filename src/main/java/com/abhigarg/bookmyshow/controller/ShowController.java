@@ -34,8 +34,8 @@ public class ShowController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Show>> getTheatreByName(@PathVariable(name = "id") int id) {
-        List<Show> showList = showService.getShowById(id);
-        return new ResponseEntity<>(showList, HttpStatus.OK);
+    public ResponseEntity<Show> getShowById(@PathVariable(name = "id") int id) {
+        Show show = showService.getShowById(id);
+        return new ResponseEntity<>(show, HttpStatus.OK);
     }
 }

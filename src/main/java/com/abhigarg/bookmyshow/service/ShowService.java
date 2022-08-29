@@ -10,5 +10,5 @@ import java.util.List;
 public interface ShowService {
     Show Add(Show show);
     List<Show> getShowByMovieIdAndHallIdAndShowDate(GetShowRequest getShowRequest);
-    List<Show> getShowById(int id);
+    Show getShowById(int id);
 }

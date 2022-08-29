@@ -1,17 +1,16 @@
 package com.abhigarg.bookmyshow.controller;
 
+import com.abhigarg.bookmyshow.entities.Show;
 import com.abhigarg.bookmyshow.entities.User;
 import com.abhigarg.bookmyshow.pojo.LoginRequest;
 import com.abhigarg.bookmyshow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")

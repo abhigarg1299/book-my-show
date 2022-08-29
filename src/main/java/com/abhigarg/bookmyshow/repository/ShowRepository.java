@@ -1,8 +1,9 @@
 package com.abhigarg.bookmyshow.repository;
 
 import com.abhigarg.bookmyshow.entities.Show;
-import lombok.Data;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,10 +12,9 @@ import java.util.List;
 public interface ShowRepository extends JpaRepository<Show, Integer> {
     List<Show> findShowByMovieIdAndHallIdAndShowDate(int movieId, int hallId, java.util.Date showDate);
 
-    List<Show> findShowById(int id);
-}
+    Show findShowById(int id);
 
-//    InsertShow(*entities.Show) error
-//    FetchShowByMovieIdHallIdShowDate(entities.Show) ([]entities.Show, error)
-//        FetchShowByShowId(int) ([]entities.Show, error)
-//        UpdateSeatsByShowId(int, int) error
+    @Query("UPDATE Show s set s.availableSeats=?2 where s.id=?1")
+    @Modifying
+    void updateAvailableSeats(int showId, int availableSeats);
+}
