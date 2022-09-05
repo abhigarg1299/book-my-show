@@ -1,7 +1,9 @@
 package com.abhigarg.bookmyshow.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -13,16 +15,18 @@ import java.util.Date;
 @Entity
 @Table(name = "SHOWS")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Show {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
-
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_MOVIES"))
     @Column(name = "MOVIE_ID")
     private int movieId;
-
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_HALLS"))
     @Column(name = "HALL_ID")
     private int hallId;
 

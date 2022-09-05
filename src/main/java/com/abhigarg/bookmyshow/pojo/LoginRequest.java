@@ -1,5 +1,6 @@
 package com.abhigarg.bookmyshow.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
+@AllArgsConstructor
 public class LoginRequest implements Serializable {
     private static final long serialVersionUID = 7702134516418120340L;
 

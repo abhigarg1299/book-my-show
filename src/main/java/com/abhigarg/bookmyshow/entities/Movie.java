@@ -1,7 +1,9 @@
 package com.abhigarg.bookmyshow.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -11,7 +13,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "MOVIES")
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Movie {
 
     @Id

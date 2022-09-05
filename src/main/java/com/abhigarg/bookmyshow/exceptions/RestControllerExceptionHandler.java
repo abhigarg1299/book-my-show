@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import javax.validation.ConstraintViolationException;
+import java.util.*;
 
 @ControllerAdvice
 public class RestControllerExceptionHandler {
@@ -25,17 +24,33 @@ public class RestControllerExceptionHandler {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public ResponseEntity<ApiResponse> resolveException(UnauthorizedException exception) {
-
         ApiResponse apiResponse = exception.getApiResponse();
+        if (null == apiResponse) {
+            apiResponse = new ApiResponse(false, exception.getMessage());
+        }
 
         return new ResponseEntity<>(apiResponse, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler({BadRequestException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ResponseEntity<ApiResponse> resolveException(BadRequestException exception) {
         ApiResponse apiResponse = exception.getApiResponse();
 
+        return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponse> resolveException(MethodArgumentNotValidException exception) {
+        Map<String, String> errors = new HashMap<>();
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        ApiResponse apiResponse = new ApiResponse(false, errors.toString());
         return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
     }
 }

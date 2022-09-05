@@ -1,6 +1,8 @@
 package com.abhigarg.bookmyshow.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.util.Date;
 @Entity
 @Table(name = "THEATRES")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Theatre {
 
     @Id
@@ -24,7 +28,7 @@ public class Theatre {
     @Column(name = "ADDRESS")
     @NotBlank(message = "Address is mandatory")
     private String address;
-
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_REGIONS"))
     @Column(name = "REGION_ID")
     @NotBlank(message = "Region Id is mandatory")
     private int regionId;

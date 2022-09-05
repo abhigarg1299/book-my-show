@@ -1,6 +1,8 @@
 package com.abhigarg.bookmyshow.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import java.util.Date;
 @Entity
 @Table(name = "TIMINGS")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Timing {
 
     @Id

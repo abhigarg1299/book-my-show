@@ -1,6 +1,8 @@
 package com.abhigarg.bookmyshow.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "HALLS")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Hall {
 
     @Id
@@ -26,7 +30,7 @@ public class Hall {
     @Column(name = "SEATS")
     @Min(6)
     private int seats;
-
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_THEATRES"))
     @Column(name = "THEATRE_ID")
     private int theatreId;
 
